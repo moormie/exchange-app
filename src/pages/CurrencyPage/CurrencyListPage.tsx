@@ -12,8 +12,7 @@ import { filterCurrencyList } from "../../helpers/filterCurrencyList";
 import { CountryCurrency } from "../../types/CountryCurrency";
 
 const StyledContainer = styled("div")(({ theme }) => ({
-  padding: theme.spacing(8),
-  height: `calc(100% - 64px)`,
+  padding: theme.spacing(0, 8, 8, 8),
 }));
 
 export const CurrencyTablePage: FC = () => {

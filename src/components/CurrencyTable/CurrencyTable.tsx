@@ -23,7 +23,7 @@ const StyledTableContainer = styled(TableContainer)(() => ({
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "#000033",
+    backgroundColor: "#47476b",
     color: theme.palette.common.white,
     fontWeight: "bold",
   },
@@ -49,12 +49,12 @@ export const CurrencyTable: FC<CurrencyTableProps> = ({ currencyList }) => {
         {currencyList.length === 0 && <caption>No currency found</caption>}
         <TableHead>
           <TableRow>
-            <StyledTableCell>Flag</StyledTableCell>
-            <StyledTableCell>Country</StyledTableCell>
-            <StyledTableCell>Currency</StyledTableCell>
-            <StyledTableCell>Buy</StyledTableCell>
-            <StyledTableCell>Sell</StyledTableCell>
-            <StyledTableCell>Middle</StyledTableCell>
+            <StyledTableCell width={140} />
+            <StyledTableCell align="center">Country</StyledTableCell>
+            <StyledTableCell align="center">Currency</StyledTableCell>
+            <StyledTableCell align="center">Buy</StyledTableCell>
+            <StyledTableCell align="center">Sell</StyledTableCell>
+            <StyledTableCell align="center">Middle</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -63,20 +63,23 @@ export const CurrencyTable: FC<CurrencyTableProps> = ({ currencyList }) => {
               key={currency.currencyCode}
               data-testid={currency.currencyCode}
             >
-              <TableCell component="th" scope="row" data-testid="country-flag">
+              <TableCell data-testid="country-flag" width={140} align="center">
                 <FlagImage currencyCode={currency.countryCode} />
               </TableCell>
-              <TableCell data-testid="country-name">
+              <TableCell data-testid="country-name" align="center">
                 {currency.countryName}
               </TableCell>
-              <TableCell data-testid="currency-code-name">{`${currency.currencyCode} (${currency.currencyName})`}</TableCell>
-              <TableCell data-testid="exchange-buy">
+              <TableCell
+                data-testid="currency-code-name"
+                align="center"
+              >{`${currency.currencyCode} (${currency.currencyName})`}</TableCell>
+              <TableCell data-testid="exchange-buy" align="center">
                 {roundToDecimal(currency.exchangeRate.buy, 2)}
               </TableCell>
-              <TableCell data-testid="exchange-sell">
+              <TableCell data-testid="exchange-sell" align="center">
                 {roundToDecimal(currency.exchangeRate.sell, 2)}
               </TableCell>
-              <TableCell data-testid="exchange-middle">
+              <TableCell data-testid="exchange-middle" align="center">
                 {roundToDecimal(currency.exchangeRate.middle, 2)}
               </TableCell>
             </StyledTableRow>
