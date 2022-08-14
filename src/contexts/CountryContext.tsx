@@ -1,16 +1,7 @@
-import React, {
-  createContext,
-  FC,
-  useContext,
-  useState,
-  useEffect,
-} from "react";
-import { countriesDataConverter } from "../converters/CountriesDataConverter";
-import { currencyListDataConverter } from "../converters/CurrencyDataListConverter";
+import { FC, createContext, useContext, useState, useEffect } from "react";
+import { URL_GET_COUNTRIES } from "../constants/constants";
+import { countriesDataConverter } from "../converters/countriesDataConverter";
 import { Country } from "../types/Country";
-
-const URL =
-  "https://gist.githubusercontent.com/tiagodealmeida/0b97ccf117252d742dddf098bc6cc58a/raw/f621703926fc13be4f618fb4a058d0454177cceb/countries.json";
 
 interface CountryListContextProps {
   children: React.ReactNode;
@@ -35,7 +26,7 @@ export const CountryListProvider: FC<CountryListContextProps> = ({
   });
 
   useEffect(() => {
-    fetch(URL)
+    fetch(URL_GET_COUNTRIES)
       .then((response) => response.json())
       .then((data) =>
         setState({
@@ -43,7 +34,10 @@ export const CountryListProvider: FC<CountryListContextProps> = ({
           loading: false,
         })
       )
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        setState({ countryList: [], loading: false });
+      });
   }, []);
 
   return (

@@ -1,14 +1,7 @@
-import React, {
-  createContext,
-  FC,
-  useContext,
-  useState,
-  useEffect,
-} from "react";
-import { currencyListDataConverter } from "../converters/CurrencyDataListConverter";
+import { FC, createContext, useContext, useState, useEffect } from "react";
+import { URL_GET_CURRENCIES } from "../constants/constants";
+import { currencyListDataConverter } from "../converters/currencyDataListConverter";
 import { Currency } from "../types/Currency";
-
-const URL = "https://run.mocky.io/v3/c88db14a-3128-4fbd-af74-1371c5bb0343";
 
 interface CurrencyListContextProps {
   children: React.ReactNode;
@@ -33,7 +26,7 @@ export const CurrencyListProvider: FC<CurrencyListContextProps> = ({
   });
 
   useEffect(() => {
-    fetch(URL)
+    fetch(URL_GET_CURRENCIES)
       .then((response) => response.json())
       .then((data) =>
         setState({
@@ -41,7 +34,10 @@ export const CurrencyListProvider: FC<CurrencyListContextProps> = ({
           loading: false,
         })
       )
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        setState({ currencyList: [], loading: false });
+      });
   }, []);
 
   return (

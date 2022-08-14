@@ -7,7 +7,7 @@ export const currencyListDataConverter = (
   const { fx = [] } = currencyListData;
 
   const convertedList: Currency[] = fx
-    .filter((e) => e.exchangeRate && e.nameI18N)
+    .filter((e) => e.exchangeRate && e.nameI18N && e.currency !== "EUR")
     .map((e) => ({
       exchangeRate: {
         buy: e.exchangeRate.buy,

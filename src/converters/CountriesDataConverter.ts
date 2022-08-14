@@ -12,6 +12,5 @@ export const countriesDataConverter = (
     countryName: c.countryName,
     currencyCode: c.currencyCode,
   }));
-
   return convertedList;
 };
