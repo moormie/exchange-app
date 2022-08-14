@@ -6,17 +6,20 @@ import reportWebVitals from "./reportWebVitals";
 
 import { CurrencyListProvider } from "./contexts/CurrencyContext";
 import { CountryListProvider } from "./contexts/CountryContext";
+import { BrowserRouter } from "react-router-dom";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <CountryListProvider>
-      <CurrencyListProvider>
-        <App />
-      </CurrencyListProvider>
-    </CountryListProvider>
+    <BrowserRouter>
+      <CountryListProvider>
+        <CurrencyListProvider>
+          <App />
+        </CurrencyListProvider>
+      </CountryListProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
