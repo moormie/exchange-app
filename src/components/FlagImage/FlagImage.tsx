@@ -9,7 +9,7 @@ export const FlagImage: FC<FlagImageProps> = ({ currencyCode }) => {
   const [error, setError] = useState(false);
   const [fallbackImgSrc, setFallbackImgSrc] = useState("");
 
-  const onError = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
+  const onError = () => {
     setError(true);
     setFallbackImgSrc(`${FLAG_IMG_PATH}no_flag.svg`);
   };

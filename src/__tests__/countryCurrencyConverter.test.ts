@@ -77,7 +77,7 @@ test("should_not_have_properties", () => {
   });
 });
 
-test("shold_be_in_alphabetical_order", () => {
+test("should_be_in_alphabetical_order", () => {
   const convertedList = countryCurrencyConverter(
     mockCountryData,
     mockCurrencyData
