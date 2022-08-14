@@ -1,11 +1,18 @@
 import { FC } from "react";
-
-import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
-import { Autocomplete, InputAdornment, TextField } from "@mui/material";
+import {
+  Autocomplete,
+  InputAdornment,
+  TextField,
+  styled,
+  alpha,
+} from "@mui/material";
+import { Currency } from "../../types/Currency";
 
 interface SearchInputProps {
-  options: string[];
+  options: Currency[];
+  onChange: (value: string | Currency | null) => void;
+  loading: boolean;
 }
 
 const StyledAutoComplete = styled(Autocomplete)(({ theme }) => ({
@@ -19,17 +26,29 @@ const StyledAutoComplete = styled(Autocomplete)(({ theme }) => ({
 
 const StyledTextField = styled(TextField)({
   "& .MuiOutlinedInput-root": {
-    padding: 4,
+    padding: "4px 8px",
     "&.Mui-focused fieldset": {
       border: "none",
     },
   },
 });
 
-export const SearchInput: FC<SearchInputProps> = ({ options }) => {
+export const SearchInput: FC<SearchInputProps> = ({
+  options,
+  onChange,
+  loading,
+}) => {
   return (
     <StyledAutoComplete
       options={options}
+      getOptionLabel={(option: any) =>
+        `${option.currencyCode} (${option.currencyName})`
+      }
+      onInputChange={(event, newInputValue) => {
+        onChange(newInputValue);
+      }}
+      onChange={(event, newValue) => onChange(newValue as Currency)}
+      loading={loading}
       renderInput={(params) => (
         <StyledTextField
           {...params}

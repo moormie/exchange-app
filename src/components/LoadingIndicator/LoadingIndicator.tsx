@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { Backdrop, CircularProgress } from "@mui/material";
 
 import { styled } from "@mui/material/styles";
