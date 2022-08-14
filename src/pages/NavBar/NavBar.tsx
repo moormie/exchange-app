@@ -12,15 +12,11 @@ const StyledAppBar = styled(AppBar)(() => ({
 }));
 
 export const NavBar: FC = () => {
-  // eslint-disable-next-line
   const [searchParams, setSearchParams] = useSearchParams();
 
   const onChange = (value: string) => {
-    if (value) {
-      setSearchParams(createSearchParams({ search: value }));
-    } else {
-      setSearchParams(createSearchParams(undefined));
-    }
+    const params = value ? { search: value } : undefined;
+    setSearchParams(createSearchParams(params));
   };
 
   return (
