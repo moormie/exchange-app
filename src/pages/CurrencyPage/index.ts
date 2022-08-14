@@ -1,1 +1,1 @@
-export * from "./CurrencyTablePage";
+export * from "./CurrencyListPage";

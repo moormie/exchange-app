@@ -1,5 +1,5 @@
+import { FC } from "react";
 import {
-  Paper,
   Table,
   TableContainer,
   TableHead,
@@ -9,27 +9,44 @@ import {
   styled,
   tableCellClasses,
 } from "@mui/material";
-import { FC } from "react";
 import { CountryCurrency } from "../../types/CountryCurrency";
-
+import { roundToDecimal } from "../../helpers/roundToDecimal";
+import { FlagImage } from "../FlagImage";
 interface CurrencyTableProps {
   currencyList: CountryCurrency[];
 }
+
+const StyledTableContainer = styled(TableContainer)(() => ({
+  borderRadius: 18,
+  boxShadow: "#00003340 0px 10px 50px",
+}));
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: "#000033",
     color: theme.palette.common.white,
+    fontWeight: "bold",
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
   },
 }));
 
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: theme.palette.action.hover,
+  },
+  "&:last-child td, &:last-child th": {
+    border: 0,
+  },
+  height: 85,
+}));
+
 export const CurrencyTable: FC<CurrencyTableProps> = ({ currencyList }) => {
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+    <StyledTableContainer>
+      <Table>
+        {currencyList.length === 0 && <caption>No currency found</caption>}
         <TableHead>
           <TableRow>
             <StyledTableCell>Flag</StyledTableCell>
@@ -42,26 +59,30 @@ export const CurrencyTable: FC<CurrencyTableProps> = ({ currencyList }) => {
         </TableHead>
         <TableBody>
           {currencyList.map((currency) => (
-            <TableRow
+            <StyledTableRow
               key={currency.currencyCode}
-              sx={{
-                "&:last-child td, &:last-child th": {
-                  border: 0,
-                },
-              }}
+              data-testid={currency.currencyCode}
             >
-              <TableCell component="th" scope="row">
-                <img src={`/flags/${currency.countryCode.toLowerCase()}.png`} />
+              <TableCell component="th" scope="row" data-testid="country-flag">
+                <FlagImage currencyCode={currency.countryCode} />
               </TableCell>
-              <TableCell>{currency.countryName}</TableCell>
-              <TableCell>{`${currency.currencyCode} (${currency.currencyName})`}</TableCell>
-              <TableCell>{currency.exchangeRate.buy} EUR</TableCell>
-              <TableCell>{currency.exchangeRate.sell} EUR</TableCell>
-              <TableCell>{currency.exchangeRate.middle} EUR</TableCell>
-            </TableRow>
+              <TableCell data-testid="country-name">
+                {currency.countryName}
+              </TableCell>
+              <TableCell data-testid="currency-code-name">{`${currency.currencyCode} (${currency.currencyName})`}</TableCell>
+              <TableCell data-testid="exchange-buy">
+                {roundToDecimal(currency.exchangeRate.buy, 2)}
+              </TableCell>
+              <TableCell data-testid="exchange-sell">
+                {roundToDecimal(currency.exchangeRate.sell, 2)}
+              </TableCell>
+              <TableCell data-testid="exchange-middle">
+                {roundToDecimal(currency.exchangeRate.middle, 2)}
+              </TableCell>
+            </StyledTableRow>
           ))}
         </TableBody>
       </Table>
-    </TableContainer>
+    </StyledTableContainer>
   );
 };
