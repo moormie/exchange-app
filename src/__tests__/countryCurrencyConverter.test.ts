@@ -1,18 +1,18 @@
 import { countryCurrencyConverter } from "../converters/countryCurrencyConverter";
 
 const mockCountryData = [
-  { countryCode: "AI", countryName: "Anguilla", currencyCode: "XCD" },
   { countryCode: "AL", countryName: "Albania", currencyCode: "ALL" },
+  { countryCode: "AZ", countryName: "Azerbaijan", currencyCode: "AZN" },
+  { countryCode: "AT", countryName: "Austria", currencyCode: "EUR" },
+  { countryCode: "AI", countryName: "Anguilla", currencyCode: "XCD" },
   { countryCode: "AM", countryName: "Armenia", currencyCode: "AMD" },
   { countryCode: "AO", countryName: "Angola", currencyCode: "AOA" },
   { countryCode: "AQ", countryName: "Antarctica", currencyCode: "" },
-  { countryCode: "AR", countryName: "Argentina", currencyCode: "ARS" },
   { countryCode: "AS", countryName: "American Samoa", currencyCode: "USD" },
-  { countryCode: "AT", countryName: "Austria", currencyCode: "EUR" },
   { countryCode: "AU", countryName: "Australia", currencyCode: "AUD" },
-  { countryCode: "AW", countryName: "Aruba", currencyCode: "AWG" },
   { countryCode: "AX", countryName: "Åland", currencyCode: "EUR" },
-  { countryCode: "AZ", countryName: "Azerbaijan", currencyCode: "AZN" },
+  { countryCode: "AW", countryName: "Aruba", currencyCode: "AWG" },
+  { countryCode: "AR", countryName: "Argentina", currencyCode: "ARS" },
 ];
 
 const mockCurrencyData = [
@@ -51,7 +51,7 @@ test("should_return_result", () => {
   expect(convertedList.length).toBeGreaterThan(0);
 });
 
-test("shoud_have_properties", () => {
+test("should_have_properties", () => {
   const convertedList = countryCurrencyConverter(
     mockCountryData,
     mockCurrencyData
@@ -64,7 +64,7 @@ test("shoud_have_properties", () => {
   });
 });
 
-test("shoud_not_have_properties", () => {
+test("should_not_have_properties", () => {
   const convertedList = countryCurrencyConverter(
     mockCountryData,
     mockCurrencyData
@@ -76,3 +76,13 @@ test("shoud_not_have_properties", () => {
     expect(e).not.toHaveProperty("continentName");
   });
 });
+
+test("shold_be_in_alphabetical_order", () => {
+  const convertedList = countryCurrencyConverter(
+    mockCountryData,
+    mockCurrencyData
+  );
+  const indexOfAnguilla = convertedList.findIndex((e) => e.countryName === "Anguilla")
+  const indexOfArgentina = convertedList.findIndex((e) => e.countryName === "Argentina")
+  expect(indexOfArgentina).toBeGreaterThan(indexOfAnguilla)
+})

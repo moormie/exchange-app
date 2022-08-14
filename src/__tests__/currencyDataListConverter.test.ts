@@ -6,7 +6,7 @@ test("should_converted_data_list_not_be_empty", () => {
   expect(convertedList.length).toBeGreaterThan(0);
 });
 
-test("shoud_have_properties", () => {
+test("should_have_properties", () => {
   const convertedList = currencyListDataConverter(currencyList);
   convertedList.forEach((e) => {
     expect(e).toHaveProperty("currencyCode");
@@ -18,7 +18,7 @@ test("shoud_have_properties", () => {
   });
 });
 
-test("shoud_not_have_properties", () => {
+test("should_not_have_properties", () => {
   const convertedList = currencyListDataConverter(currencyList);
   convertedList.forEach((e) => {
     expect(e).not.toHaveProperty("banknoteRate");
