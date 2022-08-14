@@ -2,9 +2,9 @@ import { FC } from "react";
 
 import { createSearchParams, useSearchParams } from "react-router-dom";
 import { AppBar, Toolbar, styled } from "@mui/material";
-import { useCurrencyListContext } from "../../contexts/CurrencyContext";
 import { SearchInput } from "../../components/SearchInput";
-import { Currency } from "../../types/Currency";
+import { Header } from "../../components/Header";
+import { URL_PARAM_SEARCH } from "../../constants/constants";
 
 const StyledAppBar = styled(AppBar)(() => ({
   backgroundColor: "#000033",
@@ -12,30 +12,28 @@ const StyledAppBar = styled(AppBar)(() => ({
 }));
 
 export const NavBar: FC = () => {
-  const { currencyList, loading: currencyLoading } = useCurrencyListContext();
-
   // eslint-disable-next-line
-  const [_, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const onChange = (value: string | Currency | null) => {
+  const onChange = (value: string) => {
     if (value) {
-      const currencyCode =
-        typeof value === "string" ? value : value.currencyCode;
-      setSearchParams(createSearchParams({ search: currencyCode }));
+      setSearchParams(createSearchParams({ search: value }));
     } else {
       setSearchParams(createSearchParams(undefined));
     }
   };
 
   return (
-    <StyledAppBar position="fixed">
-      <Toolbar>
-        <SearchInput
-          options={currencyList}
-          onChange={onChange}
-          loading={currencyLoading}
-        />
-      </Toolbar>
-    </StyledAppBar>
+    <>
+      <Header title="George FE Test" color="dark" />
+      <StyledAppBar position="sticky">
+        <Toolbar variant="dense">
+          <SearchInput
+            onChange={onChange}
+            value={searchParams.get(URL_PARAM_SEARCH)}
+          />
+        </Toolbar>
+      </StyledAppBar>
+    </>
   );
 };
