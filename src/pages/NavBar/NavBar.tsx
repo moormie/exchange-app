@@ -3,7 +3,6 @@ import { FC } from "react";
 import { createSearchParams, useSearchParams } from "react-router-dom";
 import { AppBar, Toolbar, styled } from "@mui/material";
 import { SearchInput } from "../../components/SearchInput";
-import { Header } from "../../components/Header";
 import { URL_PARAM_SEARCH } from "../../constants/constants";
 
 const StyledAppBar = styled(AppBar)(() => ({
