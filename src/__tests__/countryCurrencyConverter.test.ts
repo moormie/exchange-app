@@ -43,7 +43,7 @@ const mockCurrencyData = [
   },
 ];
 
-test("should_return_result", () => {
+test("should return converted result", () => {
   const convertedList = countryCurrencyConverter(
     mockCountryData,
     mockCurrencyData
@@ -51,7 +51,7 @@ test("should_return_result", () => {
   expect(convertedList.length).toBeGreaterThan(0);
 });
 
-test("should_have_properties", () => {
+test("should have properties", () => {
   const convertedList = countryCurrencyConverter(
     mockCountryData,
     mockCurrencyData
@@ -64,7 +64,7 @@ test("should_have_properties", () => {
   });
 });
 
-test("should_not_have_properties", () => {
+test("should not have properties", () => {
   const convertedList = countryCurrencyConverter(
     mockCountryData,
     mockCurrencyData
@@ -77,7 +77,7 @@ test("should_not_have_properties", () => {
   });
 });
 
-test("should_be_in_alphabetical_order", () => {
+test("should be in alphabetical order", () => {
   const convertedList = countryCurrencyConverter(
     mockCountryData,
     mockCurrencyData

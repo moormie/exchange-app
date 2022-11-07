@@ -1,12 +1,12 @@
 import { countriesDataConverter } from "../converters/countriesDataConverter";
 import { countryDataList } from "../__mocks__/mockCountriesData";
 
-test("should_converted_data_list_not_be_empty", () => {
+test("should converted data list not be empty", () => {
   const convertedList = countriesDataConverter(countryDataList);
   expect(convertedList.length).toBeGreaterThan(0);
 });
 
-test("should_have_properties", () => {
+test("should have properties", () => {
   const convertedList = countriesDataConverter(countryDataList);
   convertedList.forEach((e) => {
     expect(e).toHaveProperty("countryCode");
@@ -15,7 +15,7 @@ test("should_have_properties", () => {
   });
 });
 
-test("should_not_have_properties", () => {
+test("should not have properties", () => {
   const convertedList = countriesDataConverter(countryDataList);
   convertedList.forEach((e) => {
     expect(e).not.toHaveProperty("capital");
