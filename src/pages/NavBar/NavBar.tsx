@@ -20,16 +20,13 @@ export const NavBar: FC = () => {
   };
 
   return (
-    <>
-      <Header title="George FE Test" color="dark" />
-      <StyledAppBar position="sticky">
-        <Toolbar variant="dense">
-          <SearchInput
-            onChange={onChange}
-            value={searchParams.get(URL_PARAM_SEARCH)}
-          />
-        </Toolbar>
-      </StyledAppBar>
-    </>
+    <StyledAppBar position="sticky">
+      <Toolbar variant="dense">
+        <SearchInput
+          onChange={onChange}
+          value={searchParams.get(URL_PARAM_SEARCH)}
+        />
+      </Toolbar>
+    </StyledAppBar>
   );
 };
